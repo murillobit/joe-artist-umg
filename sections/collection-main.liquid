@@ -1,6 +1,6 @@
-<section class="container mx-auto py-8">
+<section class="container mx-auto py-16">
   {% paginate collection.products by 12 %}
-    <h1>{{ collection.title }}</h1>
+  <h1 class="text-6xl text-center mb-16">{{ collection.title }}</h1>
     <div class="flex flex-row justify-between flex-wrap">
       {% for product in collection.products %}
         {% render 'product-tile' product: product %}
@@ -8,8 +8,10 @@
         <p>no matches</p>
       {% endfor %}
     </div>
-    {% if paginate.pages > 1 %}
-      {{ paginate | default_pagination }}
-    {% endif %}
+    <div class="text-center"> 
+      {% if paginate.pages > 1 %}
+        {{ paginate | default_pagination }}
+      {% endif %}
+    </div>
   {% endpaginate %}
 </section>
