@@ -1,8 +1,8 @@
 <section data-section-id="{{ section.id }}" data-section-type="header">
   <div class="bg-pink-600 h-5"></div>
-  <div class="header-wrapper text-white py-20" 
+  <div class="header-wrapper text-white py-16" 
     style="background:{{section.settings.background_color }};">
-    <footer class="container mx-auto flex flex-row justify-between  pt-16 border-t border-t-gray-200/50">
+    <footer class="container mx-auto flex flex-row justify-between">
       <a href="/" class="logo-image px-4">
         {% if section.settings.logo != blank %}
           {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}

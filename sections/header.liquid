@@ -4,23 +4,25 @@
 {%- endcomment -%}
 <section data-section-id="{{ section.id }}" data-section-type="header">
 
-  <div class="header-wrapper text-white pt-12 pb-6" 
+  <div class="header-wrapper text-white py-4" 
     style="background:{{section.settings.top_background_color }};">
-    <header role="banner" class="container mx-auto flex flex-row justify-center items-center">
-      <a href="/" class="logo-image mr-8">
-        {% if section.settings.logo != blank %}
-          {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-          <img src="{{ section.settings.logo | img_url: image_size }}"
-              srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-              alt="{{ section.settings.logo.alt | default: shop.name }}">
-        {% else %}
-          {{ shop.name | upcase }}
-        {% endif %}
-      </a>
+    <header role="banner" class="container mx-auto flex flex-row flex-wrap justify-center items-center">
+      <div class="md:w-2/12 text-left">
+        <a href="/" class="logo-image mr-8">
+          {% if section.settings.logo != blank %}
+            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+            <img src="{{ section.settings.logo | img_url: image_size }}"
+                srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                alt="{{ section.settings.logo.alt | default: shop.name }}">
+          {% else %}
+            {{ shop.name | upcase }}
+          {% endif %}
+        </a>
+      </div>
 
-      <div class="px-8">
+      <div class="px-8 md:w-8/12">
         <nav role="navigation">
-          <ul class="flex flex-row items-center">
+          <ul class="flex flex-row flex-wrap items-center">
             {% for link in linklists[section.settings.menu].links %}
               {% if link.links != blank %}
                 <li class="mx-4">
@@ -50,10 +52,11 @@
         </nav>
       </div>
 
-
-      <a href="/cart" class="px-4">
-        {% render 'icon-cart' %}
-      </a>
+      <div class="md:w-2/12 text-right">
+        <a href="/cart">
+          {% render 'icon-cart' %}
+        </a>
+      </div>
 
     </header>
   </div>
