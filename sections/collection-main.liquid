@@ -1,0 +1,15 @@
+<section class="container mx-auto py-8">
+  {% paginate collection.products by 12 %}
+    <h1>{{ collection.title }}</h1>
+    <div class="flex flex-row justify-between flex-wrap">
+      {% for product in collection.products %}
+        {% render 'product-tile' product: product %}
+      {% else %}
+        <p>no matches</p>
+      {% endfor %}
+    </div>
+    {% if paginate.pages > 1 %}
+      {{ paginate | default_pagination }}
+    {% endif %}
+  {% endpaginate %}
+</section>
