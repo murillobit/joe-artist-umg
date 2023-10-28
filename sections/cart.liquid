@@ -1,0 +1,50 @@
+<section class="container mx-auto py-16">
+  <h1 class="text-6xl text-center mb-16">Cart</h1>
+  {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" novalidate>
+      <table class="border-collapse w-full border border-slate-400 bg-slate-50 mb-4">
+        <thead class="bg-slate-300">
+          <th class="text-center" colspan="2">Prod</th>
+          <th class="text-left">Price</th>
+          <th class="text-left">Qty</th>
+          <th class="text-left">total</th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr class="border-b border-slate-400">
+              <td class="p-2">
+                <a href="{{ item.url | within: collections.all }}">
+                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                </a>
+              </td>
+              <td class="p-2">
+                <a class="text-xl" href="{{ item.url }}">{{ item.product.title }} ({{ item.variant.title }})</a>
+              </td>
+              <td class="p-2">{{ item.price | money }}</td>
+              <td class="p-2">
+                <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0"
+                  class="bg-slate-50 border-1 border-slate-400 p-2 leading-5">
+              </td>
+              <td class="p-2">
+                {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+                {{ item.line_price | money }}
+                {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+              </td>
+              <td class="p-2">
+                <a class="text-red-700 text-xs rounded-md" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="text-right">
+        <p class="mb-8"><span class="font-semibold">Sub total:</span> {{ cart.total_price | money }}</p>
+        <button class="mr-4 bg-slate-50" type="submit" name="update">Update</button>
+        <button class="bg-blue-500 text-slate-50" type="submit" name="checkout">Checkout</button>
+      </div>
+    </form>
+  {% else %}
+    <p class="text-center">Cart is empty</p>
+  {% endif %}
+</section>
