@@ -6,7 +6,7 @@
 
   <div class="header-wrapper text-white pt-12 pb-6" 
     style="background:{{section.settings.top_background_color }};">
-    <header role="banner" class="container flex flex-row justify-center items-center">
+    <header role="banner" class="container mx-auto flex flex-row justify-center items-center">
       <a href="/" class="logo-image mr-8">
         {% if section.settings.logo != blank %}
           {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
@@ -19,7 +19,7 @@
       </a>
 
       <div class="px-8">
-        <nav role="navigation" class="container flex flex-row justify-around items-center">
+        <nav role="navigation">
           <ul class="flex flex-row items-center">
             {% for link in linklists[section.settings.menu].links %}
               {% if link.links != blank %}

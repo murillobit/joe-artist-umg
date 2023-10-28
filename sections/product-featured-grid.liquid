@@ -1,0 +1,50 @@
+<section class="product-featured-grid container mx-auto">
+  <div class="flex flex-row justify-between flex-wrap">
+    {% for block in section.blocks %}
+      {% render 'product-tile' product: all_products[block.settings.product] %}
+    {% endfor %}
+
+    {% if section.blocks.size == 0 %}
+      No content available
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Product featured grid",
+    "max_blocks": 4,
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "label": "Product",
+            "id": "product",
+            "type": "product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product grid",
+        "category": "Product",
+        "blocks": [
+          {
+            "type": "product"
+          },
+          {
+            "type": "product"
+          },
+          {
+            "type": "product"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

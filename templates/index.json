@@ -1,11 +1,14 @@
 {
   "sections": {
     "main": {
-      "type": "hello-world",
-      "settings": {
-        "heading": "Welcome to Adastra ✨ with Vue."
-      }
+      "type": "featured-hero-image"
+    },
+    "products": {
+      "type": "product-featured-grid"
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "products"
+  ]
 }
