@@ -10,3 +10,6 @@ Support the following actions:
 - Remove item from cart (updates state to render cart without this item, and submits the change to Shopify ajax cart)
 - (optional) Conditional upsell product Y will display when product X is present in the cart. Add to cart will update the cart state and submit the change to shopify.
 - (bonus) Disable all controls when a modification is in progress
+
+
+[Live Demo](https://umg-assessment-murillo.myshopify.com/)
