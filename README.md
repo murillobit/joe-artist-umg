@@ -12,4 +12,4 @@ Support the following actions:
 - (bonus) Disable all controls when a modification is in progress
 
 
-[Live Demo](https://umg-assessment-murillo.myshopify.com/)
+[Live Demo - password: 'peufla'](https://umg-assessment-murillo.myshopify.com/)
