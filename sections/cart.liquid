@@ -1,3 +1,4 @@
+{% assign show_upsell = false %}
 <section class="container mx-auto py-16" data-ajax-cart-section >
   <h1 class="text-6xl text-center mb-16">Cart</h1>
   {% if cart.item_count > 0 %}
@@ -58,6 +59,9 @@
                 </a>
               </td>
             </tr>
+            {% if section.settings.upsell_check and section.settings.upsell_check.id == item.product_id %}
+              {% assign show_upsell = true %}
+            {% endif %}
           {% endfor %}
         </tbody>
       </table>
@@ -73,6 +77,11 @@
   {% else %}
     <p class="text-center">Cart is empty</p>
   {% endif %}
+  {% if section.settings.upsell_offer and show_upsell == true %}
+    <h2 class="text-4xl mb-8">You may also like...</h2>
+    {% render 'product-tile' product: section.settings.upsell_offer, show_atc: true %}
+  {% endif %}
+  {% stylesheet %}
 </section>
 
 {% stylesheet %}
@@ -96,3 +105,22 @@ html.js-ajax-cart-processing .cart__items:after {
   padding: 8px 0;
 }
 {% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": 
+  [
+    {
+      "label": "Upsell - Product to Check",
+      "id": "upsell_check",
+      "type": "product"
+    },
+    {
+      "label": "Upsell - Product to Offer",
+      "id": "upsell_offer",
+      "type": "product"
+    }
+  ]
+}
+{% endschema %}
