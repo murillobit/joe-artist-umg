@@ -11,40 +11,41 @@
 </section>
 
 {% schema %}
-  {
-    "name": "Product featured grid",
-    "max_blocks": 4,
-    "settings": [
-    ],
-    "blocks": [
-      {
-        "type": "product",
-        "name": "Product",
-        "settings": [
-          {
-            "label": "Product",
-            "id": "product",
-            "type": "product"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Product grid",
-        "category": "Product",
-        "blocks": [
-          {
-            "type": "product"
-          },
-          {
-            "type": "product"
-          },
-          {
-            "type": "product"
-          }
-        ]
-      }
-    ]
-  }
+{
+  "name": "Product featured grid",
+  "max_blocks": 4,
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "label": "Product",
+          "id": "product",
+          "type": "product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product grid",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}

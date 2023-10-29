@@ -1,14 +1,15 @@
 <section data-section-id="{{ section.id }}" data-section-type="header">
   <div class="bg-pink-600 h-5"></div>
   <div class="header-wrapper text-white py-16" 
-    style="background:{{section.settings.background_color }};">
+    style="background:{{ section.settings.background_color }};">
     <footer class="container mx-auto flex flex-row justify-between">
       <a href="/" class="logo-image px-4">
         {% if section.settings.logo != blank %}
-          {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-          <img src="{{ section.settings.logo | img_url: image_size }}"
-              srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-              alt="{{ section.settings.logo.alt | default: shop.name }}">
+          {% capture image_size %}{{ section.settings.logo_max_width }}{% endcapture %}
+          <img loading="lazy" src="{{ section.settings.logo | image_url: width: image_size }}"
+              srcset="{{ section.settings.logo | image_url: width: image_size }} 1x, {{ section.settings.logo | image_url: width: image_size, scale: 2 }} 2x"
+              alt="{{ section.settings.logo.alt | default: shop.name }}"
+              width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
         {% else %}
           {{ shop.name | upcase }}
         {% endif %}
@@ -28,37 +29,36 @@
 </section>
 
 {% schema %}
-  {
-    "name": "Footer",
-    "settings": [
-      {
-        "type": "link_list",
-        "id": "footer_linklist",
-        "label": "First menu",
-        "default": "footer"
-      },
-      {
-        "type": "image_picker",
-        "id": "logo",
-        "label": "Logo image"
-      },
-      {
-        "type": "range",
-        "id": "logo_max_width",
-        "min": 50,
-        "max": 450,
-        "step": 10,
-        "unit": "px",
-        "label": "Custom logo width",
-        "default": 250
-      },
-      {
-        "type": "color",
-        "id": "background_color",
-        "label": "Background color",
-        "default": "#172755"
-      }
-    ]
-  }
-
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_linklist",
+      "label": "First menu",
+      "default": "footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 50,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "Custom logo width",
+      "default": 250
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#172755"
+    }
+  ]
+}
 {% endschema %}

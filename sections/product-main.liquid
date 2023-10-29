@@ -3,11 +3,11 @@
     {% assign current_variant = product.selected_or_first_available_variant %}
     <div class="product-media md:w-5/12 md:pr-8">
       {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
-      <img src="{{ featured_image | img_url: '1x1' | replace: '_1x1.', '_1000x.' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
+      <img loading="eager" src="{{ featured_image | image_url: height: 1000 }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg" width="1000" height="1000">
       <div class="media-list mt-2 flex flex-row justify-between flex-wrap">
         {% for image in product.images %}
-          <a href="{{ image.src | img_url: 'large' }}" target="_blank" class="w-1/3">
-            <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}" class="mr-2 mb-2">
+          <a href="{{ image.src | image_url: height: 1000 }}" target="_blank" class="w-1/3">
+            <img loading="lazy" src="{{ image.src | image_url: height: 160 }}" alt="{{ image.alt | escape }}" class="mr-2 mb-2" width="320" height="320">
           </a>
         {% endfor %}
       </div>
@@ -46,8 +46,5 @@
         <button type="submit" name="add" id="AddToCart" class="bg-blue-500 text-slate-50">Add to cart</button>
       </form>
     </div>
-    
-
-
   </div>
 </section>

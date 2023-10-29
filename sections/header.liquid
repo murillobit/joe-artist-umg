@@ -5,15 +5,16 @@
 <section data-section-id="{{ section.id }}" data-section-type="header">
 
   <div class="header-wrapper text-white py-4" 
-    style="background:{{section.settings.top_background_color }};">
+    style="background:{{ section.settings.top_background_color }};">
     <header role="banner" class="container mx-auto flex flex-row flex-wrap justify-center items-center">
       <div class="md:w-2/12 text-left">
         <a href="/" class="logo-image mr-8">
           {% if section.settings.logo != blank %}
-            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-            <img src="{{ section.settings.logo | img_url: image_size }}"
-                srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-                alt="{{ section.settings.logo.alt | default: shop.name }}">
+            {% capture image_size %}{{ section.settings.logo_max_width }}{% endcapture %}
+            <img loading="eager" src="{{ section.settings.logo | image_url: width: image_size }}"
+                srcset="{{ section.settings.logo | image_url: width: image_size }} 1x, {{ section.settings.logo | image_url: width: image_size, scale: 2 }} 2x"
+                alt="{{ section.settings.logo.alt | default: shop.name }}"
+                width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
           {% else %}
             {{ shop.name | upcase }}
           {% endif %}
@@ -72,46 +73,46 @@
 {% endif %}
 
 {% schema %}
-  {
-    "name": "Header",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Header"
-      },
-      {
-        "type": "color",
-        "id": "top_background_color",
-        "label": "Top Background color",
-        "default": "#0b57a2"
-      },
-      {
-         "type": "color",
-         "id": "bottom_background_color",
-         "label": "Bottom Background color",
-         "default": "#172755"
-      },
-      {
-        "type": "image_picker",
-        "id": "logo",
-        "label": "Logo image"
-      },
-      {
-        "type": "range",
-        "id": "logo_max_width",
-        "min": 50,
-        "max": 450,
-        "step": 10,
-        "unit": "px",
-        "label": "Custom logo width",
-        "default": 250
-      },
-      {
-        "type": "link_list",
-        "id": "menu",
-        "label": "Menu",
-        "default": "main-menu"
-      }
-    ]
-  }
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "color",
+      "id": "top_background_color",
+      "label": "Top Background color",
+      "default": "#0b57a2"
+    },
+    {
+      "type": "color",
+      "id": "bottom_background_color",
+      "label": "Bottom Background color",
+      "default": "#172755"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 50,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "Custom logo width",
+      "default": 250
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
 {% endschema %}

@@ -16,12 +16,12 @@
             <tr class="border-b border-slate-400">
               <td class="p-2">
                 <a href="{{ item.url | within: collections.all }}">
-                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                  <img loading="lazy" src="{{ item | image_url: width: 240, height: 240 }}" alt="{{ item.title | escape }}"   width="240" height="240"
                 </a>
               </td>
               <td class="p-2">
                 <a href="{{ item.url }}">{{ item.product.title }} ({{ item.variant.title }})</a>
-                <div class="text-xs text-red-700 pt-2" data-ajax-cart-errors="{{  item.key }}"></div>
+                <div class="text-xs text-red-700 pt-2" data-ajax-cart-errors="{{ item.key }}"></div>
               </td>
               <td class="p-2">{{ item.price | money }}</td>
               <td class="p-2">
@@ -95,5 +95,4 @@ html.js-ajax-cart-processing .cart__items:after {
   text-align: right;
   padding: 8px 0;
 }
-
 {% endstylesheet %}

@@ -4,5 +4,7 @@
       "type": "product-main"
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
