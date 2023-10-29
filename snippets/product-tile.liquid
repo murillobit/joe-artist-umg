@@ -1,19 +1,21 @@
-<div class="sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 bg-white mb-4 rounded-lg	p-3 pb-6">
-  <a href="{{ product.url }}" class="product-grid-wrapper block hover:opacity-75">
-    <img loading="lazy" src="{{ product.featured_image.src | image_url: width: 500 }}" alt="{{ product.featured_image.alt | escape }}" width="500" height="500">
-    <p class="text-grey-light text-xs uppercase font-semibold">{{ product.vendor }}</p>
-    <p class="text-grey-alternate ">{{ product.title }}</p>
-    <p class="text-black text-xl font-bold">{{ product.price | money }}</p>
-  </a>
-  {% if show_atc == true %}
-    <ajax-cart-product-form>
-      {% form 'product', product %}
-        <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
-        <input type="hidden" name="quantity" value="1">
-        <button type="submit" name="add" class="bg-pink-600 text-slate-50">
-          Add to cart
-        </button>
-      {% endform %}
-    </ajax-cart-product-form>
-  {% endif %}
+<div product-tile class="sm:w-1/2 md:w-1/3 lg:w-1/4 px-2">
+  <div class="bg-white mb-4 rounded-lg	p-3 pb-6">
+    <a href="{{ product.url }}" class="product-grid-wrapper block hover:opacity-75">
+      <img loading="lazy" src="{{ product.featured_image.src | image_url: width: 500 }}" alt="{{ product.featured_image.alt | escape }}" width="500" height="500">
+      <p class="text-grey-light text-xs uppercase font-semibold">{{ product.vendor }}</p>
+      <p class="text-grey-alternate ">{{ product.title }}</p>
+      <p class="text-black text-xl font-bold">{{ product.price | money }}</p>
+    </a>
+    {% if show_atc == true %}
+      <ajax-cart-product-form>
+        {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" name="add" class="bg-pink-600 text-slate-50">
+            Add to cart
+          </button>
+        {% endform %}
+      </ajax-cart-product-form>
+    {% endif %}
+  </div>
 </div>
