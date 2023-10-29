@@ -66,5 +66,8 @@
         product_recommendations_url: '{{ routes.product_recommendations_url }}'
       }
     </script>
+    <script type="application/json" data-ajax-cart-initial-state>
+      {{ cart | json }}
+    </script>
   </body>
 </html>

@@ -1,8 +1,8 @@
-<section class="container mx-auto py-16">
+<section class="container mx-auto py-16" data-ajax-cart-section >
   <h1 class="text-6xl text-center mb-16">Cart</h1>
   {% if cart.item_count > 0 %}
     <form action="/cart" method="post" novalidate>
-      <table class="border-collapse w-full border border-slate-400 bg-slate-50 mb-4">
+      <table class="cart__items border-collapse w-full border border-slate-400 bg-slate-50 mb-4">
         <thead class="bg-slate-300">
           <th class="text-center" colspan="2">Prod</th>
           <th class="text-left">Price</th>
@@ -12,6 +12,7 @@
         </thead>
         <tbody>
           {% for item in cart.items %}
+            {% assign line_item_index = forloop.index %}
             <tr class="border-b border-slate-400">
               <td class="p-2">
                 <a href="{{ item.url | within: collections.all }}">
@@ -19,12 +20,32 @@
                 </a>
               </td>
               <td class="p-2">
-                <a class="text-xl" href="{{ item.url }}">{{ item.product.title }} ({{ item.variant.title }})</a>
+                <a href="{{ item.url }}">{{ item.product.title }} ({{ item.variant.title }})</a>
+                <div class="text-xs text-red-700 pt-2" data-ajax-cart-errors="{{  item.key }}"></div>
               </td>
               <td class="p-2">{{ item.price | money }}</td>
               <td class="p-2">
-                <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0"
-                  class="bg-slate-50 border-1 border-slate-400 p-2 leading-5">
+                <ajax-cart-quantity>
+                  <!-- "Minus one" button -->
+                  <a data-ajax-cart-quantity-minus href="{{ routes.cart_change_url }}?line={{ line_item_index }}&quantity={{ item.quantity | minus: 1 }}" >
+                    <p class="inline"><span class="font-semibold">-</span></p>
+                  </a>
+    
+                  <!-- Item quantity input -->
+                  <input
+                    data-ajax-cart-quantity-input="{{ line_item_index }}"
+                    name="updates[]" 
+                    value="{{ item.quantity }}" 
+                    type="text" 
+                    form="my-ajax-cart-form" 
+                    class="w-16 bg-slate-50 border-1 border-slate-400 p-2 leading-5"
+                  />
+
+                  <!-- "Plus one" button -->
+                  <a data-ajax-cart-quantity-plus href="{{ routes.cart_change_url }}?line={{ line_item_index }}&quantity={{ item.quantity | plus: 1 }}">
+                    <p class="inline"><span class="font-semibold">+</span></p>
+                  </a>
+                </ajax-cart-quantity>
               </td>
               <td class="p-2">
                 {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
@@ -32,19 +53,47 @@
                 {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
               </td>
               <td class="p-2">
-                <a class="text-red-700 text-xs rounded-md" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+                <a data-ajax-cart-request-button class="text-red-700 text-xs rounded-md" href="{{ item.url_to_remove }}">
+                  Remove
+                </a>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
       <div class="text-right">
-        <p class="mb-8"><span class="font-semibold">Sub total:</span> {{ cart.total_price | money }}</p>
-        <button class="mr-4 bg-slate-50" type="submit" name="update">Update</button>
-        <button class="bg-blue-500 text-slate-50" type="submit" name="checkout">Checkout</button>
+        <div class="mb-8"><span class="font-semibold">Sub total:</span> {{ cart.total_price | money }}</div>
+        {% form 'cart', cart, id: 'my-ajax-cart-form' %}
+          <button class="bg-blue-500 text-slate-50" type="submit" name="checkout">
+            Checkout
+          </button> 
+        {% endform %}
       </div>
     </form>
   {% else %}
     <p class="text-center">Cart is empty</p>
   {% endif %}
 </section>
+
+{% stylesheet %}
+.cart__items {
+  opacity: 1;
+  transition: opacity .2s;
+}
+
+/* Make the cart content look visually disabled while updating */
+html.js-ajax-cart-processing .cart__items,
+html.js-ajax-cart-processing button {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+/* Show a loading indicator */
+html.js-ajax-cart-processing .cart__items:after {
+  content: 'Loading';
+  display: block;
+  text-align: right;
+  padding: 8px 0;
+}
+
+{% endstylesheet %}

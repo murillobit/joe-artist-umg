@@ -4,7 +4,5 @@
 </script>
 
 <template>
-  <button @click="count++">
-    Counter <output>{{ count }}</output>
-  </button>
+  <p>hello world</p>
 </template>
