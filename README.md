@@ -13,3 +13,4 @@ Support the following actions:
 
 
 [Live Demo - password: 'peufla'](https://umg-assessment-murillo.myshopify.com/)
+[Product that trigger cart upsell feature](https://umg-assessment-murillo.myshopify.com/products/the-3p-fulfilled-snowboard)
